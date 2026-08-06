@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+/* =============================================================
+   VeggieFlick — Premium International Design System
+   Inspired by Apple, Whole Foods, Amazon Fresh, Ocado, Notion
+   ============================================================= */
+
+@theme {
+  /* Brand palette */
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86efac;
+  --color-brand-400: #4ade80;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+
+  /* Neutral palette */
+  --color-ink: #111827;
+  --color-muted: #6b7280;
+  --color-line: #e5e7eb;
+  --color-surface: #f8fafc;
+  --color-canvas: #ffffff;
+
+  /* Semantic palette */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-offer: #f97316;
+  --color-fresh: #15803d;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* Shadows — intentionally subtle, Apple-like */
+  --shadow-xs: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.05), 0 1px 3px rgba(17, 24, 39, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(17, 24, 39, 0.06), 0 2px 4px -2px rgba(17, 24, 39, 0.04);
+  --shadow-lg: 0 10px 20px -8px rgba(17, 24, 39, 0.08), 0 4px 8px -4px rgba(17, 24, 39, 0.04);
+  --shadow-float: 0 12px 32px -12px rgba(21, 128, 61, 0.18);
+  --shadow-input: 0 2px 6px -2px rgba(17, 24, 39, 0.06);
+}
+
+:root {
+  color-scheme: light;
+  --font-inter: "Inter", "SF Pro Display", "Segoe UI", Roboto, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-brand-700);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@layer components {
+  /* Page container — 8px grid */
+  .container-page {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-page { padding-inline: 2rem; }
+  }
+  @media (min-width: 1280px) {
+    .container-page { padding-inline: 3rem; }
+  }
+
+  /* Headings */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-700);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 12px;
+    padding: 0.875rem 1.25rem;
+    min-height: 44px;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 120ms ease, box-shadow 150ms ease;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .btn:active:not(:disabled) { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-primary {
+    background: var(--color-brand-700);
+    color: #fff;
+    box-shadow: var(--shadow-xs);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-brand-800);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-secondary {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background: #000;
+  }
+
+  .btn-outline {
+    border: 1px solid var(--color-line);
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--color-ink);
+    background: #fff;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-surface);
+  }
+
+  .btn-sm {
+    min-height: 36px;
+    padding: 0.5rem 0.875rem;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .btn-icon {
+    padding: 0.625rem;
+    min-height: 40px;
+    min-width: 40px;
+    border-radius: 12px;
+  }
+
+  /* Cards */
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xs);
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  }
+  .card-hover:hover {
+    border-color: #d1d5db;
+    box-shadow: var(--shadow-md);
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Badges / chips */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  .chip-muted { background: #f3f4f6; color: #374151; }
+  .chip-brand { background: var(--color-brand-50); color: var(--color-brand-800); }
+  .chip-offer  { background: #fff7ed; color: #9a3412; }
+  .chip-fresh  { background: var(--color-brand-50); color: var(--color-brand-800); }
+  .chip-danger { background: #fef2f2; color: #991b1b; }
+  .chip-warning{ background: #fffbeb; color: #92400e; }
+
+  /* Form controls */
+  .field {
+    width: 100%;
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+    background: #fff;
+    color: var(--color-ink);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    letter-spacing: -0.005em;
+  }
+  .field:focus {
+    border-color: var(--color-brand-700);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.08);
+  }
+  .field::placeholder { color: #9ca3af; }
+
+  /* Inputs (search, location) */
+  .input-shell {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  }
+  .input-shell:focus-within {
+    border-color: var(--color-brand-700);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.08);
+  }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--color-line); }
+
+  /* Hide scrollbars */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* Premium product tile */
+  .product-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      radial-gradient(110% 110% at 20% 0%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
+      linear-gradient(140deg, var(--tile-from, #f0fdf4), var(--tile-to, #dcfce7));
+  }
+  .product-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+  .product-tile:hover img { transform: scale(1.03); }
+
+  /* Info bar icon pill */
+  .info-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-ink);
+    background: #fff;
+    border: 1px solid rgba(17, 24, 39, 0.06);
+  }
+
+  /* Section */
+  .section-heading h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  @media (min-width: 768px) {
+    .section-heading h2 { font-size: 36px; }
+  }
+
+  /* Animations */
+  @keyframes vf-fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes vf-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .animate-fade-up { animation: vf-fade-up 0.5s ease-out both; }
+  .animate-marquee { animation: vf-marquee 32s linear infinite; }
+
+  /* Utility */
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
