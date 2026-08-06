@@ -179,75 +179,87 @@ const FALLBACK_CATEGORIES = [
   { id: "cat-8", name: "Ready To Cook", slug: "ready-to-cook", tamilName: "சமைக்க தயார்", icon: "ready", accent: "#15803d", description: "Recipe kits with pre-cut veggies and spice packs.", sortOrder: 8 },
 ];
 
-const FALLBACK_PRODUCTS: ProductCard[] = [
+const FALLBACK_PRODUCTS: (ProductCard & { imageUrl?: string })[] = [
   {
     id: "p-1", name: "Yelakki Banana", tamilName: "ஏலக்கி வாழைப்பழம்", slug: "yelakki-banana", emoji: "banana",
+    imageUrl: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Small, aromatic and intensely sweet bananas.", isOrganic: false, isBestSeller: true, isFeatured: true,
     isFreshToday: false, isCutVegetable: false, rating: 4.8, ratingCount: 976, soldCount: 6120,
     categoryName: "Fresh Fruits", categorySlug: "fresh-fruits", variantId: "v-1", variantName: "500 g", unit: "g", mrp: 55, price: 42, discountPercentage: 24, availableStock: 150
   },
   {
     id: "p-2", name: "Country Tomato", tamilName: "நாட்டு தக்காளி", slug: "country-tomato", emoji: "tomato",
+    imageUrl: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Juicy, tangy Ooty-belt tomatoes ideal for sambar and gravies.", isOrganic: false, isBestSeller: true, isFeatured: true,
     isFreshToday: true, isCutVegetable: false, rating: 4.6, ratingCount: 812, soldCount: 5240,
     categoryName: "Fresh Vegetables", categorySlug: "fresh-vegetables", variantId: "v-2", variantName: "500 g", unit: "g", mrp: 40, price: 29, discountPercentage: 28, availableStock: 180
   },
   {
     id: "p-3", name: "Bangalore Onion", tamilName: "வெங்காயம்", slug: "bangalore-onion", emoji: "onion",
+    imageUrl: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Big sized onions with crisp layers and long shelf life.", isOrganic: false, isBestSeller: true, isFeatured: false,
     isFreshToday: false, isCutVegetable: false, rating: 4.4, ratingCount: 645, soldCount: 4810,
     categoryName: "Fresh Vegetables", categorySlug: "fresh-vegetables", variantId: "v-3", variantName: "1 kg", unit: "kg", mrp: 52, price: 38, discountPercentage: 27, availableStock: 260
   },
   {
     id: "p-4", name: "Potato", tamilName: "உருளைக்கிழங்கு", slug: "potato", emoji: "potato",
+    imageUrl: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Smooth-skinned potatoes, great for fry, curry and mash.", isOrganic: false, isBestSeller: true, isFeatured: false,
     isFreshToday: true, isCutVegetable: false, rating: 4.5, ratingCount: 590, soldCount: 4320,
     categoryName: "Fresh Vegetables", categorySlug: "fresh-vegetables", variantId: "v-4", variantName: "1 kg", unit: "kg", mrp: 48, price: 34, discountPercentage: 29, availableStock: 240
   },
   {
     id: "p-5", name: "Grated Coconut", tamilName: "தேங்காய் துருவல்", slug: "grated-coconut", emoji: "coconut",
+    imageUrl: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Freshly grated coconut for chutney and poriyal.", isOrganic: false, isBestSeller: true, isFeatured: false,
     isFreshToday: false, isCutVegetable: true, rating: 4.8, ratingCount: 401, soldCount: 3320,
     categoryName: "Cut Vegetables", categorySlug: "cut-vegetables", variantId: "v-5", variantName: "200 g", unit: "g", mrp: 55, price: 45, discountPercentage: 18, availableStock: 120
   },
   {
     id: "p-6", name: "Carrot Ooty", tamilName: "கேரட்", slug: "carrot-ooty", emoji: "carrot",
+    imageUrl: "https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Crunchy, sweet hill carrots rich in beta carotene.", isOrganic: false, isBestSeller: false, isFeatured: true,
     isFreshToday: true, isCutVegetable: false, rating: 4.7, ratingCount: 431, soldCount: 3120,
     categoryName: "Fresh Vegetables", categorySlug: "fresh-vegetables", variantId: "v-6", variantName: "500 g", unit: "g", mrp: 45, price: 32, discountPercentage: 29, availableStock: 160
   },
   {
     id: "p-7", name: "Alphonso Mango", tamilName: "அல்போன்சோ மாம்பழம்", slug: "alphonso-mango", emoji: "mango",
+    imageUrl: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80",
     shortDescription: "The king of mangoes — carbide free, naturally ripened.", isOrganic: false, isBestSeller: false, isFeatured: true,
     isFreshToday: true, isCutVegetable: false, rating: 4.9, ratingCount: 512, soldCount: 2860,
     categoryName: "Fresh Fruits", categorySlug: "fresh-fruits", variantId: "v-7", variantName: "6 pieces", unit: "pc", mrp: 899, price: 649, discountPercentage: 28, availableStock: 45
   },
   {
     id: "p-8", name: "Palak Spinach", tamilName: "பசலைக் கீரை", slug: "palak-spinach", emoji: "leafy",
+    imageUrl: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Iron-rich tender spinach bunches.", isOrganic: false, isBestSeller: true, isFeatured: false,
     isFreshToday: true, isCutVegetable: false, rating: 4.5, ratingCount: 268, soldCount: 2050,
     categoryName: "Leafy Vegetables", categorySlug: "leafy-vegetables", variantId: "v-8", variantName: "1 bunch", unit: "bunch", mrp: 25, price: 18, discountPercentage: 28, availableStock: 150
   },
   {
     id: "p-9", name: "Organic Tomato", tamilName: "இயற்கை தக்காளி", slug: "organic-tomato", emoji: "tomato",
+    imageUrl: "https://images.unsplash.com/photo-1546470427-227c7369a9e3?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Certified organic, grown with cow-based inputs.", isOrganic: true, isBestSeller: false, isFeatured: true,
     isFreshToday: false, isCutVegetable: false, rating: 4.7, ratingCount: 198, soldCount: 1180,
     categoryName: "Organic", categorySlug: "organic", variantId: "v-9", variantName: "500 g", unit: "g", mrp: 75, price: 59, discountPercentage: 21, availableStock: 70
   },
   {
     id: "p-10", name: "Broccoli", tamilName: "ப்ரோக்கோலி", slug: "broccoli", emoji: "broccoli",
+    imageUrl: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Dense green crowns, rich in sulforaphane.", isOrganic: false, isBestSeller: false, isFeatured: true,
     isFreshToday: false, isCutVegetable: false, rating: 4.5, ratingCount: 212, soldCount: 1420,
     categoryName: "Exotic Vegetables", categorySlug: "exotic-vegetables", variantId: "v-10", variantName: "250 g", unit: "g", mrp: 89, price: 65, discountPercentage: 27, availableStock: 70
   },
   {
     id: "p-11", name: "Sambar Recipe Kit", tamilName: "சாம்பார் கிட்", slug: "sambar-recipe-kit", emoji: "soup",
+    imageUrl: "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Pre-cut veggies plus fresh-ground sambar podi.", isOrganic: false, isBestSeller: true, isFeatured: true,
     isFreshToday: false, isCutVegetable: true, rating: 4.8, ratingCount: 296, soldCount: 1980,
     categoryName: "Ready To Cook", categorySlug: "ready-to-cook", variantId: "v-11", variantName: "Serves 4", unit: "pack", mrp: 199, price: 149, discountPercentage: 25, availableStock: 60
   },
   {
     id: "p-12", name: "Cut Mixed Vegetables", tamilName: "கலவை காய்கறி", slug: "cut-mixed-vegetables", emoji: "salad",
+    imageUrl: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
     shortDescription: "Sambar-ready mix, washed and chopped this morning.", isOrganic: false, isBestSeller: false, isFeatured: true,
     isFreshToday: true, isCutVegetable: true, rating: 4.7, ratingCount: 342, soldCount: 2480,
     categoryName: "Cut Vegetables", categorySlug: "cut-vegetables", variantId: "v-12", variantName: "400 g", unit: "g", mrp: 89, price: 69, discountPercentage: 22, availableStock: 80

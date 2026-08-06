@@ -112,7 +112,7 @@ export default async function HomePage() {
           <div className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
               <Image
-                src="/images/hero-fresh.jpg"
+                src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=80"
                 alt="Basket of fresh Indian vegetables and fruits"
                 fill
                 priority
