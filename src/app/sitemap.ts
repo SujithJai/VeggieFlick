@@ -8,12 +8,21 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://veggieflick.in";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [productRows, categoryRows, blogRows, recipeRows] = await Promise.all([
-    db.select({ slug: products.slug, updatedAt: products.updatedAt }).from(products).where(eq(products.status, "active")),
-    db.select({ slug: categories.slug }).from(categories).where(eq(categories.status, "active")),
-    db.select({ slug: blogs.slug, updatedAt: blogs.updatedAt }).from(blogs).where(eq(blogs.status, "active")),
-    db.select({ slug: recipes.slug, updatedAt: recipes.updatedAt }).from(recipes).where(eq(recipes.status, "active")),
-  ]);
+  let productRows: { slug: string; updatedAt: Date }[] = [];
+  let categoryRows: { slug: string }[] = [];
+  let blogRows: { slug: string; updatedAt: Date }[] = [];
+  let recipeRows: { slug: string; updatedAt: Date }[] = [];
+
+  try {
+    [productRows, categoryRows, blogRows, recipeRows] = await Promise.all([
+      db.select({ slug: products.slug, updatedAt: products.updatedAt }).from(products).where(eq(products.status, "active")),
+      db.select({ slug: categories.slug }).from(categories).where(eq(categories.status, "active")),
+      db.select({ slug: blogs.slug, updatedAt: blogs.updatedAt }).from(blogs).where(eq(blogs.status, "active")),
+      db.select({ slug: recipes.slug, updatedAt: recipes.updatedAt }).from(recipes).where(eq(recipes.status, "active")),
+    ]);
+  } catch (error) {
+    console.warn("Sitemap DB fetch warning:", error);
+  }
 
   const staticRoutes = ["", "/shop", "/about", "/help", "/blog", "/recipes", "/legal/privacy", "/legal/terms"].map(
     (route) => ({
