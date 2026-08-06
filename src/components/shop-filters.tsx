@@ -72,11 +72,10 @@ export function ShopFilters({ categories, total }: { categories: Category[]; tot
               key={category.id}
               type="button"
               onClick={() => update({ category: category.slug })}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm ${
-                activeCategory === category.slug ? "bg-brand-50 font-semibold text-brand-700" : "hover:bg-surface"
+              className={`block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${
+                activeCategory === category.slug ? "bg-brand-50 font-semibold text-brand-700" : "hover:bg-surface text-ink"
               }`}
             >
-              <span aria-hidden>{category.icon}</span>
               {category.name}
             </button>
           ))}

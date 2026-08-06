@@ -100,7 +100,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 : "border-line text-muted"
             }`}
           >
-            <span aria-hidden>{category.icon}</span> {category.name}
+            {category.name}
           </Link>
         ))}
       </div>
