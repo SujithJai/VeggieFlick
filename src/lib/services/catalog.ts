@@ -300,9 +300,12 @@ export async function listProducts(query: ProductQuery) {
   if (query.bestSeller === "true") filtered = filtered.filter(p => p.isBestSeller);
   if (query.freshToday === "true") filtered = filtered.filter(p => p.isFreshToday);
   if (query.cut === "true") filtered = filtered.filter(p => p.isCutVegetable);
-  if (query.minDiscount) filtered = filtered.filter(p => p.discountPercentage >= query.minDiscount);
+  if (query.minDiscount !== undefined) {
+    const minD = query.minDiscount;
+    filtered = filtered.filter(p => p.discountPercentage >= minD);
+  }
 
-  return { items: filtered.slice(0, query.limit), total: filtered.length };
+  return { items: filtered.slice(0, query.limit ?? 24), total: filtered.length };
 }
 
 export async function listCollection(
