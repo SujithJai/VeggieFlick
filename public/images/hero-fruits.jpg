@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgFruits" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#ffedd5"/>
+    </linearGradient>
+    <filter id="shadowF" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgFruits)"/>
+  <g filter="url(#shadowF)">
+    <rect x="150" y="140" width="500" height="340" rx="40" fill="#ffffff"/>
+    <!-- Bananas -->
+    <path d="M220,240 Q320,200 400,320 Q320,380 220,240 Z" fill="#eab308"/>
+    <path d="M260,260 Q340,230 410,340 Q340,400 260,260 Z" fill="#facc15"/>
+    <!-- Mango -->
+    <path d="M450,220 C530,220 570,300 520,380 C470,440 400,380 410,300 C420,240 450,220 450,220 Z" fill="#f97316"/>
+    <!-- Apple -->
+    <circle cx="320" cy="360" r="55" fill="#ef4444"/>
+    <circle cx="305" cy="345" r="12" fill="#fca5a5" opacity="0.6"/>
+  </g>
+  <text x="400" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="22" fill="#c2410c">Fresh Seasonal Fruits · VeggieFlick</text>
+</svg>

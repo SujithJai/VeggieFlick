@@ -53,6 +53,23 @@ export default async function HomePage() {
     console.error("HomePage DB load error:", error);
   }
 
+  if (recipeRows.length === 0) {
+    recipeRows = [
+      { id: "r-1", title: "Classic Arachuvitta Sambar", slug: "classic-arachuvitta-sambar", emoji: "soup", summary: "Freshly ground sambar podi transforms an everyday sambar into a Sunday special.", preparationTime: 15, cookingTime: 30, difficulty: "Easy" },
+      { id: "r-2", title: "Keerai Masiyal With Garlic Tempering", slug: "keerai-masiyal-with-garlic-tempering", emoji: "leafy", summary: "A five-ingredient comfort dish that pairs with rice, roti or idli.", preparationTime: 10, cookingTime: 15, difficulty: "Easy" },
+      { id: "r-3", title: "Roasted Broccoli And Bell Pepper Toss", slug: "roasted-broccoli-and-bell-pepper-toss", emoji: "broccoli", summary: "A ten-minute high-protein side that keeps its crunch.", preparationTime: 10, cookingTime: 10, difficulty: "Easy" },
+      { id: "r-4", title: "Chennai Sunday Vegetable Biryani", slug: "chennai-sunday-vegetable-biryani", emoji: "rice", summary: "Seeraga samba rice, mint and a kit that removes all the prep work.", preparationTime: 30, cookingTime: 35, difficulty: "Medium" }
+    ];
+  }
+
+  if (blogRows.length === 0) {
+    blogRows = [
+      { id: "b-1", title: "How VeggieFlick Keeps Vegetables Farm Fresh For 24 Hours", slug: "how-veggieflick-keeps-vegetables-farm-fresh", emoji: "delivery", shortDescription: "From a 4 AM harvest to your kitchen before lunch — inside our Chennai cold chain." },
+      { id: "b-2", title: "Seasonal Eating In Tamil Nadu: A Month By Month Guide", slug: "seasonal-eating-in-tamil-nadu", emoji: "calendar", shortDescription: "What to buy, when to buy it, and why seasonal produce always tastes better." },
+      { id: "b-3", title: "Storing Greens So They Last Three Days Longer", slug: "storing-greens-so-they-last-three-days-longer", emoji: "leafy", shortDescription: "The wet-cloth method, the box trick, and mistakes that wilt your keerai overnight." }
+    ];
+  }
+
   return (
     <>
       {/* HERO */}

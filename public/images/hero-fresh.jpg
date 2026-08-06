@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative Leaves -->
+  <g filter="url(#shadow)">
+    <!-- Basket Container -->
+    <rect x="150" y="140" width="500" height="340" rx="40" fill="#ffffff"/>
+    
+    <!-- Fresh Tomatoes -->
+    <circle cx="280" cy="280" r="65" fill="#ef4444"/>
+    <circle cx="260" cy="260" r="15" fill="#fca5a5" opacity="0.6"/>
+    <path d="M280,210 Q285,215 280,225 Q275,215 280,210 Z" fill="#15803d"/>
+    
+    <circle cx="390" cy="330" r="55" fill="#dc2626"/>
+    <circle cx="375" cy="315" r="12" fill="#fca5a5" opacity="0.6"/>
+    
+    <!-- Okra / Ladies Finger -->
+    <path d="M420,180 Q480,270 540,360" stroke="#22c55e" stroke-width="24" stroke-linecap="round" fill="none"/>
+    <path d="M440,170 Q500,260 560,350" stroke="#16a34a" stroke-width="20" stroke-linecap="round" fill="none"/>
+
+    <!-- Carrots -->
+    <path d="M220,380 L350,440 L240,430 Z" fill="#f97316"/>
+    <path d="M200,370 L330,420 L220,410 Z" fill="#ea580c"/>
+    
+    <!-- Eggplant / Brinjal -->
+    <path d="M480,260 C530,260 560,320 540,380 C520,430 460,420 450,370 C440,320 450,260 480,260 Z" fill="#6b21a8"/>
+    <path d="M475,240 Q485,255 495,240 Z" fill="#15803d"/>
+
+    <!-- Fresh Mint / Leafy Green -->
+    <path d="M260,360 Q220,320 250,280 Q290,320 260,360 Z" fill="#16a34a"/>
+    <path d="M300,380 Q260,340 290,300 Q330,340 300,380 Z" fill="#22c55e"/>
+  </g>
+  
+  <text x="400" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="22" fill="#15803d">Farm Fresh Harvest · VeggieFlick</text>
+</svg>

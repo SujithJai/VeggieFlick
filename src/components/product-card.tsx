@@ -69,19 +69,9 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
         aria-label={product.name}
         className="relative block aspect-square overflow-hidden bg-surface"
       >
-        {hero ? (
-          <Image
-            src={hero}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-          />
-        ) : (
-          <span className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-surface to-white text-brand-700/70 transition-transform duration-300 group-hover:scale-105">
-            <DynamicIcon name={product.emoji} size={56} strokeWidth={1.2} />
-          </span>
-        )}
+        <span className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-50/80 via-white to-surface text-brand-700 transition-transform duration-300 group-hover:scale-105">
+          <DynamicIcon name={product.emoji} size={54} strokeWidth={1.3} />
+        </span>
 
         {/* Badges */}
         <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
