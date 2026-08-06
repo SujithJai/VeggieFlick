@@ -26,18 +26,32 @@ const TESTIMONIALS = [
 ];
 
 export default async function HomePage() {
-  const [categories, flashSale, bestSellers, freshToday, organic, exotic, counts, recipeRows, blogRows] =
-    await Promise.all([
-      listCategories(),
-      listCollection({ minDiscount: 20 }, 10, "discount"),
-      listCollection({ bestSeller: "true" }, 10, "popularity"),
-      listCollection({ freshToday: "true" }, 8, "newest"),
-      listCollection({ organic: "true" }, 8, "popularity"),
-      listCollection({ category: "exotic-vegetables" }, 8, "popularity"),
-      catalogCounts(),
-      db.select().from(recipes).where(eq(recipes.status, "active")).orderBy(desc(recipes.createdAt)).limit(4),
-      db.select().from(blogs).where(eq(blogs.status, "active")).orderBy(desc(blogs.publishedAt)).limit(3),
-    ]);
+  let categories: Awaited<ReturnType<typeof listCategories>> = [];
+  let flashSale: Awaited<ReturnType<typeof listCollection>> = [];
+  let bestSellers: Awaited<ReturnType<typeof listCollection>> = [];
+  let freshToday: Awaited<ReturnType<typeof listCollection>> = [];
+  let organic: Awaited<ReturnType<typeof listCollection>> = [];
+  let exotic: Awaited<ReturnType<typeof listCollection>> = [];
+  let counts = { productCount: 0, organicCount: 0 };
+  let recipeRows: any[] = [];
+  let blogRows: any[] = [];
+
+  try {
+    [categories, flashSale, bestSellers, freshToday, organic, exotic, counts, recipeRows, blogRows] =
+      await Promise.all([
+        listCategories(),
+        listCollection({ minDiscount: 20 }, 10, "discount"),
+        listCollection({ bestSeller: "true" }, 10, "popularity"),
+        listCollection({ freshToday: "true" }, 8, "newest"),
+        listCollection({ organic: "true" }, 8, "popularity"),
+        listCollection({ category: "exotic-vegetables" }, 8, "popularity"),
+        catalogCounts(),
+        db.select().from(recipes).where(eq(recipes.status, "active")).orderBy(desc(recipes.createdAt)).limit(4),
+        db.select().from(blogs).where(eq(blogs.status, "active")).orderBy(desc(blogs.publishedAt)).limit(3),
+      ]);
+  } catch (error) {
+    console.error("HomePage DB load error:", error);
+  }
 
   return (
     <>

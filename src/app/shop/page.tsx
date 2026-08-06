@@ -39,7 +39,18 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     ? parsed.data
     : productQuerySchema.parse({ page: "1", limit: "24", sort: "popularity" });
 
-  const [{ items, total }, categories] = await Promise.all([listProducts(query), listCategories()]);
+  let items: any[] = [];
+  let total = 0;
+  let categories: any[] = [];
+
+  try {
+    const [result, catList] = await Promise.all([listProducts(query), listCategories()]);
+    items = result.items;
+    total = result.total;
+    categories = catList;
+  } catch (error) {
+    console.error("ShopPage DB load error:", error);
+  }
   const totalPages = Math.max(1, Math.ceil(total / query.limit));
 
   function pageHref(page: number) {
