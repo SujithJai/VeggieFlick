@@ -347,20 +347,25 @@ export async function listCategories() {
 }
 
 export async function listSubCategories(categorySlug?: string) {
-  const filters = [eq(subCategories.status, "active")];
-  if (categorySlug) filters.push(eq(categories.slug, categorySlug));
-  return db
-    .select({
-      id: subCategories.id,
-      name: subCategories.name,
-      slug: subCategories.slug,
-      categorySlug: categories.slug,
-      categoryName: categories.name,
-    })
-    .from(subCategories)
-    .innerJoin(categories, eq(categories.id, subCategories.categoryId))
-    .where(and(...filters))
-    .orderBy(asc(subCategories.sortOrder));
+  try {
+    const filters = [eq(subCategories.status, "active")];
+    if (categorySlug) filters.push(eq(categories.slug, categorySlug));
+    return await db
+      .select({
+        id: subCategories.id,
+        name: subCategories.name,
+        slug: subCategories.slug,
+        categorySlug: categories.slug,
+        categoryName: categories.name,
+      })
+      .from(subCategories)
+      .innerJoin(categories, eq(categories.id, subCategories.categoryId))
+      .where(and(...filters))
+      .orderBy(asc(subCategories.sortOrder));
+  } catch (err) {
+    console.warn("listSubCategories warning:", err);
+    return [];
+  }
 }
 
 export async function getCategoryBySlug(slug: string) {

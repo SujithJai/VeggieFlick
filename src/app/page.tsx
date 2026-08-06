@@ -26,31 +26,28 @@ const TESTIMONIALS = [
 ];
 
 export default async function HomePage() {
-  let categories: Awaited<ReturnType<typeof listCategories>> = [];
-  let flashSale: Awaited<ReturnType<typeof listCollection>> = [];
-  let bestSellers: Awaited<ReturnType<typeof listCollection>> = [];
-  let freshToday: Awaited<ReturnType<typeof listCollection>> = [];
-  let organic: Awaited<ReturnType<typeof listCollection>> = [];
-  let exotic: Awaited<ReturnType<typeof listCollection>> = [];
-  let counts = { productCount: 0, organicCount: 0 };
-  let recipeRows: any[] = [];
-  let blogRows: any[] = [];
+  const [categories, flashSale, bestSellers, freshToday, organic, exotic, counts] = await Promise.all([
+    listCategories(),
+    listCollection({ minDiscount: 20 }, 10, "discount"),
+    listCollection({ bestSeller: "true" }, 10, "popularity"),
+    listCollection({ freshToday: "true" }, 8, "newest"),
+    listCollection({ organic: "true" }, 8, "popularity"),
+    listCollection({ category: "exotic-vegetables" }, 8, "popularity"),
+    catalogCounts(),
+  ]);
 
+  let recipeRows: any[] = [];
   try {
-    [categories, flashSale, bestSellers, freshToday, organic, exotic, counts, recipeRows, blogRows] =
-      await Promise.all([
-        listCategories(),
-        listCollection({ minDiscount: 20 }, 10, "discount"),
-        listCollection({ bestSeller: "true" }, 10, "popularity"),
-        listCollection({ freshToday: "true" }, 8, "newest"),
-        listCollection({ organic: "true" }, 8, "popularity"),
-        listCollection({ category: "exotic-vegetables" }, 8, "popularity"),
-        catalogCounts(),
-        db.select().from(recipes).where(eq(recipes.status, "active")).orderBy(desc(recipes.createdAt)).limit(4),
-        db.select().from(blogs).where(eq(blogs.status, "active")).orderBy(desc(blogs.publishedAt)).limit(3),
-      ]);
-  } catch (error) {
-    console.error("HomePage DB load error:", error);
+    recipeRows = await db.select().from(recipes).where(eq(recipes.status, "active")).orderBy(desc(recipes.createdAt)).limit(4);
+  } catch (err) {
+    console.warn("recipes fetch warning:", err);
+  }
+
+  let blogRows: any[] = [];
+  try {
+    blogRows = await db.select().from(blogs).where(eq(blogs.status, "active")).orderBy(desc(blogs.publishedAt)).limit(3);
+  } catch (err) {
+    console.warn("blogs fetch warning:", err);
   }
 
   if (recipeRows.length === 0) {
