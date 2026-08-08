@@ -25,6 +25,8 @@ const TESTIMONIALS = [
   { name: "Fathima Noor", area: "T. Nagar", text: "Cut vegetables save me twenty minutes every day and the packaging is genuinely clean. Prices beat my local market.", rating: 4 },
 ];
 
+import { ChefDialogueSlider } from "@/components/chef-dialogue-slider";
+
 export default async function HomePage() {
   const [categories, flashSale, bestSellers, freshToday, organic, exotic, counts] = await Promise.all([
     listCategories(),
@@ -69,11 +71,11 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO SECTION WITH DUAL-TONE SOFT BLUE TO WHITE GRADIENT & EMBOSSED CHEF EASY COOKING BANNER */}
+      {/* HERO SECTION WITH DUAL-TONE SOFT BLUE TO WHITE GRADIENT & DYNAMIC CHEF DIALOGUE SLIDER */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-white pb-6 pt-4 md:py-16">
         {/* Subtle decorative color ambient glows */}
         <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-sky-200/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 top-40 h-96 w-96 rounded-full bg-emerald-200/30 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 top-40 h-96 w-96 rounded-full bg-indigo-100/40 blur-3xl" />
 
         <div className="container-page grid items-center gap-10 py-6 md:py-8 lg:grid-cols-[1.15fr_1fr]">
           <div className="animate-fade-up">
@@ -81,60 +83,25 @@ export default async function HomePage() {
               <Badge tone="brand" icon="fresh">
                 {counts.productCount}+ products · Chennai only
               </Badge>
-              <span className="chip bg-sky-100 font-semibold text-sky-800 border border-sky-200">
+              <span className="chip bg-sky-100 font-semibold text-sky-900 border border-sky-200">
                 ✨ Easy Cooking & Ready to Meal
               </span>
             </div>
 
-            <h1 className="mt-5 text-balance text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink md:text-[62px]">
+            {/* Front Headline Text (NO Green Color on Front Headline) */}
+            <h1 className="mt-5 text-balance text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-slate-900 md:text-[62px]">
               Farm fresh produce,{" "}
-              <span className="bg-gradient-to-r from-emerald-600 via-sky-600 to-emerald-700 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-700 via-indigo-800 to-slate-900 bg-clip-text text-transparent">
                 delivered before breakfast.
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted">
+            <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-slate-600">
               Vegetables, fruits, pre-cut veggies and 10-minute ready-to-cook meal kits picked at dawn from Tamil Nadu farms — at your Chennai doorstep when you need them.
             </p>
 
-            {/* EMBOSSED CHEF DIALOGUE BANNER ("Easy Cooking for Office Returnees") */}
-            <div className="mt-6 rounded-3xl border border-sky-200/80 bg-white/85 p-5 shadow-xl backdrop-blur-md transition-all hover:shadow-2xl md:p-6">
-              <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-emerald-600 text-white shadow-md">
-                  <ChefHat className="h-8 w-8" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800 uppercase tracking-wider">
-                      Chef&apos;s Special Solution
-                    </span>
-                    <span className="text-xs text-muted flex items-center gap-1 font-medium">
-                      <Clock size={12} className="text-sky-600" /> 10-Min Meal Kits
-                    </span>
-                  </div>
-                  <h3 className="mt-1 text-base font-bold text-ink md:text-lg">
-                    &ldquo;ஆபீஸ்ல இருந்து வர்றீங்களா? இனி குக் பண்ண கஷ்டப்பட வேண்டாம்!&rdquo;
-                  </h3>
-                  <p className="mt-1 text-xs text-muted leading-relaxed md:text-sm">
-                    No peeling, no chopping, zero stress. Pre-washed, freshly chopped veggies & 10-minute ready-to-cook meal kits ready when you reach home!
-                  </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <Link
-                      href="/shop?category=ready-to-cook"
-                      className="btn btn-primary bg-sky-700 hover:bg-sky-800 border-none py-2 text-xs font-bold"
-                    >
-                      <UtensilsCrossed size={14} /> Ready to Cook Kits
-                    </Link>
-                    <Link
-                      href="/shop?category=cut-vegetables"
-                      className="btn btn-outline border-sky-300 text-sky-800 hover:bg-sky-50 py-2 text-xs font-semibold"
-                    >
-                      Pre-Cut Veggies 🥗
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* EMBOSSED DYNAMIC CHEF DIALOGUE SLIDER */}
+            <ChefDialogueSlider />
 
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/shop" className="btn btn-primary shadow-lg shadow-emerald-600/20">
