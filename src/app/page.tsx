@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
-import { Bike, Leaf, MessageCircle, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
+import { Bike, ChefHat, Clock, Leaf, MessageCircle, ShieldCheck, Sparkles, Star, Truck, UtensilsCrossed } from "lucide-react";
 import { db } from "@/db";
 import { blogs, recipes } from "@/db/schema";
 import { catalogCounts, listCategories, listCollection } from "@/lib/services/catalog";
@@ -69,37 +69,89 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="container-page grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1.1fr_1fr]">
+      {/* HERO SECTION WITH DUAL-TONE SOFT BLUE TO WHITE GRADIENT & EMBOSSED CHEF EASY COOKING BANNER */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-white pb-6 pt-4 md:py-16">
+        {/* Subtle decorative color ambient glows */}
+        <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-sky-200/40 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 top-40 h-96 w-96 rounded-full bg-emerald-200/30 blur-3xl" />
+
+        <div className="container-page grid items-center gap-10 py-6 md:py-8 lg:grid-cols-[1.15fr_1fr]">
           <div className="animate-fade-up">
-          <Badge tone="brand" icon="fresh">
-            {counts.productCount}+ products · Chennai only
-          </Badge>
-            <h1 className="mt-5 text-balance text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-ink md:text-[64px]">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone="brand" icon="fresh">
+                {counts.productCount}+ products · Chennai only
+              </Badge>
+              <span className="chip bg-sky-100 font-semibold text-sky-800 border border-sky-200">
+                ✨ Easy Cooking & Ready to Meal
+              </span>
+            </div>
+
+            <h1 className="mt-5 text-balance text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink md:text-[62px]">
               Farm fresh produce,{" "}
-              <span className="text-brand-700">delivered before breakfast.</span>
+              <span className="bg-gradient-to-r from-emerald-600 via-sky-600 to-emerald-700 bg-clip-text text-transparent">
+                delivered before breakfast.
+              </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-muted">
-              Vegetables, fruits, cut veggies and ready-to-cook kits picked at dawn from Tamil Nadu farms — at
-              your Chennai doorstep in the slot you choose.
+
+            <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted">
+              Vegetables, fruits, pre-cut veggies and 10-minute ready-to-cook meal kits picked at dawn from Tamil Nadu farms — at your Chennai doorstep when you need them.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/shop" className="btn btn-primary">
+
+            {/* EMBOSSED CHEF DIALOGUE BANNER ("Easy Cooking for Office Returnees") */}
+            <div className="mt-6 rounded-3xl border border-sky-200/80 bg-white/85 p-5 shadow-xl backdrop-blur-md transition-all hover:shadow-2xl md:p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-emerald-600 text-white shadow-md">
+                  <ChefHat className="h-8 w-8" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800 uppercase tracking-wider">
+                      Chef&apos;s Special Solution
+                    </span>
+                    <span className="text-xs text-muted flex items-center gap-1 font-medium">
+                      <Clock size={12} className="text-sky-600" /> 10-Min Meal Kits
+                    </span>
+                  </div>
+                  <h3 className="mt-1 text-base font-bold text-ink md:text-lg">
+                    &ldquo;ஆபீஸ்ல இருந்து வர்றீங்களா? இனி குக் பண்ண கஷ்டப்பட வேண்டாம்!&rdquo;
+                  </h3>
+                  <p className="mt-1 text-xs text-muted leading-relaxed md:text-sm">
+                    No peeling, no chopping, zero stress. Pre-washed, freshly chopped veggies & 10-minute ready-to-cook meal kits ready when you reach home!
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <Link
+                      href="/shop?category=ready-to-cook"
+                      className="btn btn-primary bg-sky-700 hover:bg-sky-800 border-none py-2 text-xs font-bold"
+                    >
+                      <UtensilsCrossed size={14} /> Ready to Cook Kits
+                    </Link>
+                    <Link
+                      href="/shop?category=cut-vegetables"
+                      className="btn btn-outline border-sky-300 text-sky-800 hover:bg-sky-50 py-2 text-xs font-semibold"
+                    >
+                      Pre-Cut Veggies 🥗
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href="/shop" className="btn btn-primary shadow-lg shadow-emerald-600/20">
                 Shop today&apos;s harvest
               </Link>
-              <Link href="/shop?freshToday=true" className="btn btn-outline">
+              <Link href="/shop?freshToday=true" className="btn btn-outline bg-white/90">
                 Fresh today collection
               </Link>
             </div>
 
-            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-3">
+            <dl className="mt-8 grid max-w-lg grid-cols-3 gap-3">
               {[
                 { label: "Delivery radius", value: "25 km" },
                 { label: "Delivery slots", value: "6 daily" },
                 { label: "Organic SKUs", value: `${counts.organicCount}+` },
               ].map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-line bg-white px-3 py-3">
+                <div key={stat.label} className="rounded-2xl border border-sky-100 bg-white/90 px-3 py-3 shadow-sm">
                   <dt className="text-[10px] font-semibold tracking-widest text-muted uppercase">
                     {stat.label}
                   </dt>
@@ -110,37 +162,51 @@ export default async function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border-4 border-white shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=80"
                 alt="Basket of fresh Indian vegetables and fruits"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 620px"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <span className="rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+                  Fresh Daily Harvest
+                </span>
+                <p className="mt-1 text-sm font-semibold text-white/90">Ooty Carrots, Country Tomatoes, Alphonso Mangoes & Leafy Greens</p>
+              </div>
             </div>
-            <div className="card absolute -bottom-5 left-4 flex items-center gap-3 px-4 py-3 shadow-lg md:left-8">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-50 text-brand-700">
+
+            <div className="card absolute -bottom-5 left-4 flex items-center gap-3 border border-sky-100 bg-white/95 px-4 py-3 shadow-xl backdrop-blur-md md:left-8">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-700">
                 <Bike size={18} strokeWidth={1.6} />
               </span>
               <div>
                 <p className="text-[11px] text-muted">Next available slot</p>
-                <p className="text-[13px] font-semibold">Tomorrow · 06:00 – 08:00 AM</p>
+                <p className="text-[13px] font-bold text-ink">Tomorrow · 06:00 – 08:00 AM</p>
               </div>
             </div>
-            <div className="card absolute -top-4 right-4 hidden items-center gap-2 px-3 py-2 shadow-md md:flex">
-              <span className="text-brand-700">
+
+            <div className="card absolute -top-4 right-4 hidden items-center gap-2 border border-emerald-100 bg-white/95 px-3 py-2 shadow-md md:flex">
+              <span className="text-emerald-600">
                 <Leaf size={14} strokeWidth={1.7} />
               </span>
-              <span className="text-[12px] font-semibold">Delivering across Chennai</span>
+              <span className="text-[12px] font-bold text-emerald-900">Farm Fresh Across Chennai</span>
             </div>
           </div>
         </div>
       </section>
 
+      {/* INSTAMART-STYLE FREE DELIVERY BANNER */}
+      <div className="bg-[#e6f9f3] border-y border-[#b2edd6] py-3 text-center text-xs md:text-sm font-extrabold text-[#00684a]">
+        🚀 <span className="tracking-wide uppercase">FREE DELIVERY</span> on all orders above ₹199 across Chennai!
+      </div>
+
       {/* CATEGORIES */}
-      <section className="container-page py-14 md:py-16">
+      <section className="container-page py-10 md:py-14">
         <SectionHeading
           eyebrow="Shop by category"
           title="Everything fresh, sorted for you"
@@ -152,10 +218,10 @@ export default async function HomePage() {
             <Link
               key={category.id}
               href={`/shop?category=${category.slug}`}
-              className="card card-lift flex flex-col items-center gap-3 p-4 text-center"
+              className="card card-lift flex flex-col items-center gap-3 p-4 text-center border-sky-100/60 hover:border-sky-300"
             >
               <CategoryIconTile icon={category.icon} accent={category.accent} size={56} />
-              <span className="text-[13px] font-semibold text-ink">{category.name}</span>
+              <span className="text-[13px] font-bold text-ink">{category.name}</span>
             </Link>
           ))}
         </div>
@@ -179,9 +245,9 @@ export default async function HomePage() {
       {/* BEST SELLERS */}
       <section className="container-page py-14 md:py-16">
         <SectionHeading
-          eyebrow="Best sellers"
-          title="What Chennai buys every week"
-          description="The staples that go into thousands of baskets across the city."
+          eyebrow="Popular in Chennai"
+          title="Most shopped near you"
+          description="The daily fresh staples that go into thousands of Chennai kitchens every morning."
           href="/shop?bestSeller=true"
         />
         <ProductCarousel products={bestSellers} />

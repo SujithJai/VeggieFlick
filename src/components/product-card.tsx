@@ -65,29 +65,27 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
       style={{ animationDelay: `${Math.min(index * 40, 400)}ms` }}
     >
       {/* Image area */}
-      <Link
-        href={`/product/${product.slug}`}
-        aria-label={product.name}
-        className="relative block aspect-square overflow-hidden bg-surface"
-      >
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-          />
-        ) : (
-          <span className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-50/80 via-white to-surface text-brand-700 transition-transform duration-300 group-hover:scale-105">
-            <DynamicIcon name={product.emoji} size={54} strokeWidth={1.3} />
-          </span>
-        )}
+      <div className="relative block aspect-square overflow-hidden bg-surface">
+        <Link href={`/product/${product.slug}`} aria-label={product.name} className="block h-full w-full">
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+            />
+          ) : (
+            <span className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-50/80 via-white to-surface text-brand-700 transition-transform duration-300 group-hover:scale-105">
+              <DynamicIcon name={product.emoji} size={54} strokeWidth={1.3} />
+            </span>
+          )}
+        </Link>
 
         {/* Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
+        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 pointer-events-none">
           {discountPct > 0 && (
-            <span className="chip chip-offer">{discountPct}% OFF</span>
+            <span className="chip chip-offer bg-emerald-600 text-white font-bold">{discountPct}% OFF</span>
           )}
           {product.isOrganic && (
             <Badge tone="fresh">Organic</Badge>
@@ -97,40 +95,57 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
           )}
         </div>
 
+        {/* Floating Quick Add (+) Button Overlay like Instamart */}
+        {!outOfStock && !line && (
+          <button
+            type="button"
+            onClick={() => void addItem(product.id, product.variantId, 1)}
+            aria-label={`Add ${product.name} to cart`}
+            className="absolute bottom-2.5 right-2.5 flex h-9 w-9 items-center justify-center rounded-xl bg-[#005a43] text-white shadow-md transition-transform hover:scale-110 active:scale-95"
+          >
+            <Plus size={18} strokeWidth={2.5} />
+          </button>
+        )}
+
         <button
           type="button"
           onClick={() => void toggleWishlist()}
           aria-label={`Save ${product.name} to wishlist`}
           className="absolute top-2.5 right-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-muted shadow-sm backdrop-blur transition-colors hover:text-brand-700"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z" />
           </svg>
         </button>
-      </Link>
+      </div>
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-3.5">
         <Rating value={product.rating} count={product.ratingCount} />
 
         <Link href={`/product/${product.slug}`}>
-          <h3 className="mt-1.5 line-clamp-2 text-[14px] font-semibold leading-snug tracking-[-0.01em] text-ink transition-colors group-hover:text-brand-700">
+          <h3 className="mt-1 line-clamp-2 text-[14px] font-bold leading-snug tracking-[-0.01em] text-ink transition-colors group-hover:text-brand-700">
             {product.name}
           </h3>
         </Link>
         {product.tamilName && (
-          <p className="mt-0.5 line-clamp-1 text-[11px] text-muted">{product.tamilName}</p>
+          <p className="mt-0.5 line-clamp-1 text-[11px] font-medium text-emerald-800">{product.tamilName}</p>
         )}
 
-        <p className="mt-1 text-[12px] text-muted">{product.variantName}</p>
+        {/* Unit Pill Tag */}
+        <div className="mt-1.5">
+          <span className="inline-block rounded-md border border-line bg-surface px-2 py-0.5 text-[11px] font-semibold text-muted">
+            {product.variantName}
+          </span>
+        </div>
 
-        <div className="mt-auto flex items-end justify-between gap-2 pt-3">
-          <div className="flex flex-col">
-            <span className="text-[16px] font-semibold tracking-[-0.01em] text-ink">
+        <div className="mt-auto flex items-center justify-between gap-2 pt-3">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-[16px] font-extrabold tracking-[-0.01em] text-ink">
               {formatINR(product.price)}
             </span>
             {product.mrp > product.price && (
-              <span className="text-[11px] text-muted line-through">
+              <span className="text-[11px] font-medium text-muted line-through">
                 {formatINR(product.mrp)}
               </span>
             )}
@@ -139,31 +154,31 @@ export function ProductCard({ product, index = 0 }: { product: ProductCardData; 
           {outOfStock ? (
             <span className="chip chip-muted">Out of stock</span>
           ) : line ? (
-            <div className="flex items-center gap-0.5 rounded-full border border-brand-700 bg-brand-700 text-white">
+            <div className="flex items-center gap-0.5 rounded-full border border-brand-700 bg-brand-700 text-white shadow-sm">
               <button
                 type="button"
                 aria-label={`Decrease ${product.name}`}
-                className="flex h-8 w-8 items-center justify-center transition-colors hover:bg-brand-800"
+                className="flex h-7 w-7 items-center justify-center transition-colors hover:bg-brand-800"
                 onClick={() => void setQuantity(line.id, line.quantity - 1)}
               >
-                <Minus size={13} strokeWidth={2} />
+                <Minus size={12} strokeWidth={2.5} />
               </button>
-              <span className="min-w-6 text-center text-[13px] font-semibold">{line.quantity}</span>
+              <span className="min-w-5 text-center text-[12px] font-bold">{line.quantity}</span>
               <button
                 type="button"
                 aria-label={`Increase ${product.name}`}
-                className="flex h-8 w-8 items-center justify-center transition-colors hover:bg-brand-800 disabled:opacity-40"
+                className="flex h-7 w-7 items-center justify-center transition-colors hover:bg-brand-800 disabled:opacity-40"
                 disabled={line.quantity >= product.availableStock}
                 onClick={() => void setQuantity(line.id, line.quantity + 1)}
               >
-                <Plus size={13} strokeWidth={2} />
+                <Plus size={12} strokeWidth={2.5} />
               </button>
             </div>
           ) : (
             <button
               type="button"
               onClick={() => void addItem(product.id, product.variantId, 1)}
-              className="btn btn-outline btn-sm border-brand-700 font-semibold text-brand-700 hover:bg-brand-700 hover:text-white"
+              className="btn btn-outline btn-sm border-brand-700 font-bold text-brand-700 hover:bg-brand-700 hover:text-white"
             >
               Add
             </button>
