@@ -25,6 +25,7 @@ const TESTIMONIALS = [
   { name: "Fathima Noor", area: "T. Nagar", text: "Cut vegetables save me twenty minutes every day and the packaging is genuinely clean. Prices beat my local market.", rating: 4 },
 ];
 
+import { HeroDialogueHeading } from "@/components/hero-dialogue-heading";
 import { ChefDialogueSlider } from "@/components/chef-dialogue-slider";
 
 export default async function HomePage() {
@@ -71,7 +72,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* HERO SECTION WITH DUAL-TONE SOFT BLUE TO WHITE GRADIENT & DYNAMIC CHEF DIALOGUE SLIDER */}
+      {/* HERO SECTION WITH DUAL-TONE SOFT BLUE TO WHITE GRADIENT & DYNAMIC HERO QUOTES HEADING */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-white pb-6 pt-4 md:py-16">
         {/* Subtle decorative color ambient glows */}
         <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-sky-200/40 blur-3xl" />
@@ -88,15 +89,12 @@ export default async function HomePage() {
               </span>
             </div>
 
-            {/* Front Headline Text (NO Green Color on Front Headline) */}
-            <h1 className="mt-5 text-balance text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-slate-900 md:text-[62px]">
-              Farm fresh produce,{" "}
-              <span className="bg-gradient-to-r from-sky-700 via-indigo-800 to-slate-900 bg-clip-text text-transparent">
-                delivered before breakfast.
-              </span>
-            </h1>
+            {/* Dynamic Rotating Quotes Title Replacing Old Text */}
+            <div className="mt-4">
+              <HeroDialogueHeading />
+            </div>
 
-            <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-slate-600">
+            <p className="mt-2 max-w-xl text-[17px] leading-relaxed text-slate-600">
               Vegetables, fruits, pre-cut veggies and 10-minute ready-to-cook meal kits picked at dawn from Tamil Nadu farms — at your Chennai doorstep when you need them.
             </p>
 
